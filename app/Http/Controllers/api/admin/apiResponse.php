@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\api\auth;
+namespace App\Http\Controllers\api\admin;
 
 
 trait apiResponse
 {
     public function apiResponse($data=null, $message='')
     {
-        $status = 200;
+        $status=200;
         $array = [
             'success' => true,
             'status'  => $status,
@@ -19,7 +19,7 @@ trait apiResponse
 
     public function sendError($error)
     {
-        $code=401;
+        $code=404;
     	$response = [
             'success' => false,
             'message' => $error,
