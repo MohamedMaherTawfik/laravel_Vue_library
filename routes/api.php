@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\api\admin\bookController;
 use App\Http\Controllers\api\admin\categoreyController;
 use App\Http\Controllers\api\auth\AuthController;
 use Illuminate\Http\Request;
@@ -24,4 +25,13 @@ Route::controller(categoreyController::class)->group(function () {
     Route::post('/categorey', 'store');
     Route::post('/categorey/{id}', 'update');
     Route::delete('/categorey/{id}', 'destroy');
+});
+
+
+Route::controller(bookController::class)->group(function () {
+    Route::get('/book', 'index');
+    Route::get('/book/{id}', 'show');
+    Route::post('/book', 'store');
+    Route::post('/book/{id}', 'update');
+    Route::delete('/book/{id}', 'destroy');
 });
