@@ -20,7 +20,7 @@ class categoreyController extends Controller
 
     public function index()
     {
-        return $this->apiResponse($this->categoreyRepository->index(), 'Categorey List');
+        return $this->apiResponse($this->categoreyRepository->allCategories(), 'Categorey List');
     }
 
     public function store(categoreyRequest $request)
@@ -30,12 +30,12 @@ class categoreyController extends Controller
         $imageName = time() . '.' . $image->getClientOriginalExtension();
         $image->storeAs('categorey', $imageName, 'public');
         $fields['image'] = $imageName;
-        return $this->apiResponse($this->categoreyRepository->store($fields), 'Categorey Created');
+        return $this->apiResponse($this->categoreyRepository->createCategorey($fields), 'Categorey Created');
     }
 
     public function show()
     {
-        return $this->apiResponse($this->categoreyRepository->show(request('id')), 'Categorey fetched');
+        return $this->apiResponse($this->categoreyRepository->showCategory(request('id')), 'Categorey fetched');
     }
 
     public function update(Request $request)
@@ -50,11 +50,11 @@ class categoreyController extends Controller
             $image->storeAs('categorey', $imageName, 'public');
             $fields['image'] = $imageName;
         }
-        return $this->apiResponse($this->categoreyRepository->update($fields, request('id')), 'Categorey Updated');
+        return $this->apiResponse($this->categoreyRepository->updateCategory($fields, request('id')), 'Categorey Updated');
     }
 
     public function destroy()
     {
-        return $this->apiResponse($this->categoreyRepository->destroy(request('id')), 'Categorey Deleted');
+        return $this->apiResponse($this->categoreyRepository->deleteCategory(request('id')), 'Categorey Deleted');
     }
 }

@@ -7,27 +7,27 @@ use App\interface\categoreyInterface;
 
 class CategoreyRepository implements categoreyInterface
 {
-    public function index()
+    public function allCategories()
     {
-        return categories::all();
+        return categories::paginate(5);
     }
 
-    public function show($id)
+    public function showCategory($id)
     {
-        return categories::find($id);
+        return categories::with('book')->findOrFail($id);
     }
 
-    public function store($request)
+    public function createCategorey($request)
     {
         return categories::create($request->all());
     }
 
-    public function update($request, $id)
+    public function updateCategory($request, $id)
     {
         return categories::findOrFail($id)->update($request->all());
     }
 
-    public function destroy($id)
+    public function deleteCategory($id)
     {
         return categories::find($id)->delete();
     }

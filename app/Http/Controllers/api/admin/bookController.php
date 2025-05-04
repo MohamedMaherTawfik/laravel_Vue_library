@@ -18,7 +18,7 @@ class bookController extends Controller
 
     public function index()
     {
-        return $this->apiResponse($this->bookRepository->index(), 'Book List');
+        return $this->apiResponse($this->bookRepository->allBooks(), 'Book List');
     }
 
     public function store(bookRequest $request)
@@ -28,7 +28,7 @@ class bookController extends Controller
         $imageName = time() . '.' . $image->getClientOriginalExtension();
         $image->storeAs('books', $imageName, 'public');
         $fields['image'] = $imageName;
-        return $this->apiResponse($this->bookRepository->store($fields), 'Book Created');
+        return $this->apiResponse($this->bookRepository->createBook($fields), 'Book Created');
     }
 
     public function update(Request $request)
@@ -45,12 +45,12 @@ class bookController extends Controller
             $image->storeAs('books', $imageName, 'public');
             $fields['image'] = $imageName;
         }
-        return $this->apiResponse($this->bookRepository->update($fields, request('id')), 'Book Updated');
+        return $this->apiResponse($this->bookRepository->updateBook($fields, request('id')), 'Book Updated');
     }
 
     public function destroy()
     {
-        return $this->apiResponse($this->bookRepository->destroy(request('id')), 'Book Deleted');
+        return $this->apiResponse($this->bookRepository->deleteBook(request('id')), 'Book Deleted');
     }
 
 }

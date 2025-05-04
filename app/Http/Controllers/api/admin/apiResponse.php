@@ -7,24 +7,20 @@ trait apiResponse
 {
     public function apiResponse($data=null, $message='')
     {
-        $status=200;
-        $array = [
+        return response()->json([
             'success' => true,
-            'status'  => $status,
             'message' => $message,
             'data'    => $data,
-        ];
-        return response($array);
+        ], 200);
     }
 
     public function sendError($error)
     {
-        $code=404;
     	$response = [
             'success' => false,
             'message' => $error,
         ];
 
-        return response()->json($response, $code);
+        return response()->json($response, 404);
     }
 }

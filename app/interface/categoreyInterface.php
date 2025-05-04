@@ -4,9 +4,9 @@ namespace App\interface;
 
 interface categoreyInterface
 {
-    public function index();
-    public function store($request);
-    public function show($id);
-    public function update($request,$id);
-    public function destroy($id);
+    public function allCategories();
+    public function createCategorey($request);
+    public function showCategory($id);
+    public function updateCategory($request,$id);
+    public function deleteCategory($id);
 }

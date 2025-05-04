@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\api\auth;
+namespace App\Http\Controllers\web\books;
 
 
 trait apiResponse
@@ -21,6 +21,6 @@ trait apiResponse
             'message' => $error,
         ];
 
-        return response()->json($response,401);
+        return response()->json($response,404);
     }
 }

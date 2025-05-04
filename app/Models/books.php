@@ -19,4 +19,9 @@ class books extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function borrow()
+    {
+        return $this->hasMany(borrows::class);
+    }
 }
