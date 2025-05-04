@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('title');
             $table->foreignIdFor(User::class)->constrained()->cascadeOnDelete();
             $table->foreignIdFor(categories::class)->constrained()->cascadeOnDelete();
+            $table->double('price');
             $table->string('description');
             $table->string('image');
             $table->string('author');

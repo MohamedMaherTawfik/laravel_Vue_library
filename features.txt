@@ -1,7 +1,7 @@
 -- Create Auth using Jwt == Done
 -- Create Categorey Functionallity == Done
 -- Create books Functionallity == Done
--- Create Borrow System
--- Create Buying System using (stripe || Paypal) Payment
+-- Create Borrow System == Done
+-- Create Buying System using (stripe || Paypal) Payment == Not Supported in Egypt
 -- Start using vue js to make the frontend using the endpoints you created
 -- try to make performance fast as possible
