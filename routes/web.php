@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('home.index');
-});
+// 👇 This should be your ONLY route for a Vue SPA
+Route::get('/{any}', function () {
+    return view('home.index'); // where your Vue app is mounted
+})->where('any', '.*');

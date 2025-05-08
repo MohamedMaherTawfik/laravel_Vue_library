@@ -37,7 +37,7 @@
                     </div>
                     <div class="col-lg-6">
                         <img
-                            src="../../../public/images/logohitos.jpg"
+                            src="../../../../public/images/logohitos.jpg"
                             alt="Premium Products"
                             class="img-fluid rounded shadow"
                         />
@@ -52,7 +52,7 @@
                 <div class="row align-items-center">
                     <div class="col-lg-6 mb-4 mb-lg-0">
                         <img
-                            src="../../../public/images/about-us.jpg"
+                            src="../../../../public/images/about-us.jpg"
                             alt="About Our Company"
                             class="img-fluid rounded shadow"
                         />
@@ -593,7 +593,7 @@
                     </div>
                     <div class="col-md-6 text-center text-md-end">
                         <img
-                            src="../../../public/images/libro.avif"
+                            src="../../../../public/images/libro.avif"
                             alt="Payment Methods"
                             class="img-fluid rounded-circle"
                             style="max-height: 30%"
@@ -607,11 +607,7 @@
 
 <script>
 import axios from "axios";
-import { ref } from "vue";
-import NavbarComponent from "./navbarComponent.vue";
-import DividerComponent from "./dividerComponent.vue";
 
-const customerReviews = ref([]); // or whatever structure you're using
 export default {
     name: "CategorySection",
     data() {

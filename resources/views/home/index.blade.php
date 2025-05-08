@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>My Vue App</title>
     @vite('resources/js/app.js')
@@ -11,7 +12,7 @@
     <div id="app">
         <home-component></home-component>
     </div>
+    <script src="{{ mix('/js/app.js') }}"></script>
 </body>
 
 </html>
-
