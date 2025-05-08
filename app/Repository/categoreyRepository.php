@@ -9,7 +9,7 @@ class CategoreyRepository implements categoreyInterface
 {
     public function allCategories()
     {
-        return categories::paginate(5);
+        return categories::all();
     }
 
     public function showCategory($id)

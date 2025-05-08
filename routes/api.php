@@ -22,28 +22,26 @@ Route::group([
 });
 
 Route::group([
-    'middleware' => ['api', checkAdmin::class],
     'prefix' => 'categorey'
 ], function () {
     Route::controller(categoreyController::class)->group(function () {
         Route::get('', 'index');
         Route::get('/{id}', 'show');
-        Route::post('', 'store');
-        Route::post('/{id}', 'update');
-        Route::delete('/{id}', 'destroy');
+        Route::post('', 'store')->middleware(checkAdmin::class);
+        Route::post('/{id}', 'update')->middleware(checkAdmin::class);
+        Route::delete('/{id}', 'destroy')->middleware(checkAdmin::class);
     });
 });
 
 Route::group([
-    'middleware' => ['api', checkAdmin::class],
     'prefix' => 'book'
 ], function () {
     Route::controller(bookController::class)->group(function () {
         Route::get('', 'index');
         Route::get('/{id}', 'show');
-        Route::post('', 'store');
-        Route::post('/{id}', 'update');
-        Route::delete('/{id}', 'destroy');
+        Route::post('', 'store')->middleware(checkAdmin::class);
+        Route::post('/{id}', 'update')->middleware(checkAdmin::class);
+        Route::delete('/{id}', 'destroy')->middleware(checkAdmin::class);
     });
 });
 

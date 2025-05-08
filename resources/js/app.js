@@ -1,12 +1,16 @@
-import { createApp } from 'vue';
-import './bootstrap';
-import 'animate.css';
-import '../css/app.css';
+import { createApp } from "vue";
+import "./bootstrap";
+import "animate.css";
+import "../css/app.css";
+import "bootstrap/dist/css/bootstrap.css";
+import "bootstrap-icons/font/bootstrap-icons.css";
 
-import RegisterComponent from './components/registerComponent.vue';
-import LoginComponent from './components/loginComponent.vue';
+import RegisterComponent from "./components/registerComponent.vue";
+import LoginComponent from "./components/loginComponent.vue";
+import HomePageComponent from "./components/homePageComponent.vue";
 
 const app = createApp({});
-app.component('register-component', RegisterComponent);
-app.component('login-component', LoginComponent);
-app.mount('#app');
+app.component("register-component", RegisterComponent);
+app.component("login-component", LoginComponent);
+app.component("home-component", HomePageComponent);
+app.mount("#app");

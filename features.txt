@@ -3,5 +3,10 @@
 -- Create books Functionallity == Done
 -- Create Borrow System == Done
 -- Create Buying System using (stripe || Paypal) Payment == Not Supported in Egypt
--- Start using vue js to make the frontend using the endpoints you created
+-- register page using vue js == Done
+-- login page using vue js == Done
+-- Home page using vue js
+-- details page using vue js
+-- profile page using vue js
+-- dashboard using vue js
 -- try to make performance fast as possible
