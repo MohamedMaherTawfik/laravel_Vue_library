@@ -5,8 +5,8 @@ import Register from "../views/auth/register.vue";
 
 const routes = [
     { path: "/", component: Home },
-    { path: "/login", component: Login },
-    { path: "/register", component: Register },
+    { path: "/login", component: Login, meta: { hideNavbar: true } },
+    { path: "/register", component: Register, meta: { hideNavbar: true } },
     // Add other routes here
 ];
 

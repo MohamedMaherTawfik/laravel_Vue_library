@@ -1,9 +1,5 @@
 <template>
     <div class="min-vh-100 bg-white">
-        <!-- Navigation Bar -->
-        <navbar-component></navbar-component>
-        <!-- End Navigation Bar -->
-
         <!-- Animated Wave Divider -->
         <divider-component></divider-component>
         <!--End Animated Wave Divider -->
