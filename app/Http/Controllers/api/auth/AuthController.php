@@ -17,7 +17,14 @@ class AuthController extends Controller
         $fields = $request->validated();
         $user = $fields;
         $user['password'] = bcrypt($user['password']);
-        $user = User::create($user);
+        $user = User::create([
+            'username' => $user['username'],
+            'first_name' => $user['first_name'],
+            'last_name' => $user['last_name'],
+            'email' => $user['email'],
+            'password' => $user['password'],
+            'phone' => $user['phone'],
+        ]);
         if (!$user) {
             return $this->sendError('Register Failed');
         }
@@ -32,7 +39,7 @@ class AuthController extends Controller
         }
         $success = $this->respondWithToken($token);
 
-        return $this->apiResponse($success->original, 'Login Successfully');
+        return $this->apiResponse($success->original, 'Logined bro');
     }
     public function profile()
     {

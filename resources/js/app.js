@@ -1,6 +1,7 @@
 import { createApp } from "vue";
 import App from "./App.vue"; // <-- import root component
 import router from "./router";
+import axios from "axios";
 
 // your imports (bootstrap, css, etc.)
 import "./bootstrap";

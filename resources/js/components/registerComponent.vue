@@ -14,11 +14,11 @@
         <!-- Right Side: Registration Form -->
         <div
             class="d-flex justify-content-center align-items-center w-100 w-md-50 p-4"
-            style="background-color: #031B36FF;"
+            style="background-color: #031b36ff"
         >
             <div
                 class="card shadow-lg p-4 rounded-4 w-100"
-                style="max-width: 100%; background-color: #031B3652;"
+                style="max-width: 100%; background-color: #031b3652"
             >
                 <h3 class="text-center text-white mb-4 fw-bold">New Account</h3>
 

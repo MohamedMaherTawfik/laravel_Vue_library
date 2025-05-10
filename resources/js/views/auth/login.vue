@@ -22,10 +22,9 @@
             >
                 <h3 class="text-center text-white mb-4 fw-bold">Login</h3>
 
-                <form @submit.prevent="login">
+                <form>
                     <div class="form-floating mb-3">
                         <input
-                            v-model="form.email"
                             type="email"
                             id="email"
                             class="form-control bg-dark bg-opacity-10 text-white border border-white rounded"
@@ -38,7 +37,6 @@
 
                     <div class="form-floating mb-3">
                         <input
-                            v-model="form.password"
                             type="password"
                             id="password"
                             class="form-control bg-dark bg-opacity-10 text-white border border-white rounded"
@@ -52,17 +50,7 @@
                     </div>
 
                     <div class="d-flex justify-content-center">
-                        <button
-                            type="submit"
-                            class="btn btn-primary w-35 mb-2"
-                            :disabled="loading"
-                        >
-                            <span
-                                v-if="loading"
-                                class="spinner-border spinner-border-sm me-2"
-                                role="status"
-                                aria-hidden="true"
-                            ></span>
+                        <button type="submit" class="btn btn-primary w-35 mb-2">
                             Sign in
                         </button>
                     </div>
@@ -92,11 +80,9 @@
                     </p>
                 </form>
 
-                <div v-if="error" class="alert alert-danger mt-3">
-                    {{ error }}
-                </div>
-                <div v-if="success" class="alert alert-success mt-3">
-                    {{ success }}
+                <div class="alert alert-danger mt-3 d-none">Error message</div>
+                <div class="alert alert-success mt-3 d-none">
+                    Success message
                 </div>
             </div>
         </div>
@@ -104,6 +90,8 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
     data() {
         return {
@@ -123,15 +111,19 @@ export default {
             this.success = null;
 
             try {
-                const response = await axios.post("/api/auth/login", {
+                const response = await axios.post("", {
                     email: this.form.email,
                     password: this.form.password,
                 });
 
-                this.success = "Login successful!";
-                // Save token, redirect, etc.
+                // Store token
+                const token = response.data.data.access_token;
+                localStorage.setItem("auth_token", token);
+
+                // Redirect - using window.location if router not available
+                window.location.href = "/";
             } catch (err) {
-                this.error = err.response?.data?.message || "Login failed.";
+                this.error = err.response?.data?.message || "Login failed";
             } finally {
                 this.loading = false;
             }

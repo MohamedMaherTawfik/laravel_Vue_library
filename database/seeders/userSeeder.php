@@ -15,15 +15,15 @@ class userSeeder extends Seeder
     {
         $users=
         [
-            [
-                'first_name' => 'Mohamed',
-                'last_name' => 'Maher',
-                'email' => 'm7mdellham77@gmail.com',
-                'username' => 'm7mdmaher106',
-                'phone' => '01024328382',
-                'role' => 'admin',
-                'password' => bcrypt('M7mdmaher11'),
-            ],
+            // [
+            //     'first_name' => 'Mohamed',
+            //     'last_name' => 'Maher',
+            //     'email' => 'm7mdellham77@gmail.com',
+            //     'username' => 'm7mdmaher106',
+            //     'phone' => '01024328382',
+            //     'role' => 'admin',
+            //     'password' => bcrypt('M7mdmaher11'),
+            // ],
             [
                 'first_name' => 'Ahmed',
                 'last_name' => 'Maher',

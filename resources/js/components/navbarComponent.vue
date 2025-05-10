@@ -5,13 +5,6 @@
         >
             <!-- Left: Logo and Brand -->
             <div class="d-flex align-items-center">
-                <img
-                    src="/images/logo.png"
-                    alt="Logo"
-                    class="rounded-circle me-2"
-                    width="40"
-                    height="40"
-                />
                 <router-link
                     to="/"
                     class="text-decoration-none fw-bold fs-4 text-dark"

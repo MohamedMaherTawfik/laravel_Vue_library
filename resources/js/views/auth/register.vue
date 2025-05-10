@@ -7,9 +7,12 @@
                 background-image: url('/images/library.jpg');
                 background-size: cover;
                 background-position: center;
-                height: 100vh; /* or any height you want */
+                height: 100vh;
             "
-        ></div>
+        >
+            <h1 class="display-4 fw-bold">BRAFY</h1>
+            <p class="lead">SINCE 1989</p>
+        </div>
 
         <!-- Right Side: Registration Form -->
         <div
@@ -23,19 +26,55 @@
                 <h3 class="text-center text-white mb-4 fw-bold">New Account</h3>
 
                 <form @submit.prevent="register">
+                    <!-- Username Field -->
                     <div class="form-floating mb-3">
                         <input
-                            v-model="form.name"
+                            v-model="form.username"
                             type="text"
-                            id="name"
+                            id="username"
                             class="form-control bg-dark bg-opacity-10 text-white border border-white rounded"
                             placeholder="Username"
                             required
                             style="--bs-bg-opacity: 0.1"
                         />
-                        <label for="name" class="text-white">Username</label>
+                        <label for="username" class="text-white"
+                            >Username</label
+                        >
                     </div>
 
+                    <!-- First Name Field -->
+                    <div class="form-floating mb-3">
+                        <input
+                            v-model="form.first_name"
+                            type="text"
+                            id="first_name"
+                            class="form-control bg-dark bg-opacity-10 text-white border border-white rounded"
+                            placeholder="First Name"
+                            required
+                            style="--bs-bg-opacity: 0.1"
+                        />
+                        <label for="first_name" class="text-white"
+                            >First Name</label
+                        >
+                    </div>
+
+                    <!-- Last Name Field -->
+                    <div class="form-floating mb-3">
+                        <input
+                            v-model="form.last_name"
+                            type="text"
+                            id="last_name"
+                            class="form-control bg-dark bg-opacity-10 text-white border border-white rounded"
+                            placeholder="Last Name"
+                            required
+                            style="--bs-bg-opacity: 0.1"
+                        />
+                        <label for="last_name" class="text-white"
+                            >Last Name</label
+                        >
+                    </div>
+
+                    <!-- Email Field -->
                     <div class="form-floating mb-3">
                         <input
                             v-model="form.email"
@@ -49,32 +88,21 @@
                         <label for="email" class="text-white">Email</label>
                     </div>
 
+                    <!-- Phone Field -->
                     <div class="form-floating mb-3">
                         <input
                             v-model="form.phone"
-                            type="text"
+                            type="tel"
                             id="phone"
                             class="form-control bg-dark bg-opacity-10 text-white border border-white rounded"
                             placeholder="Phone"
+                            required
                             style="--bs-bg-opacity: 0.1"
                         />
                         <label for="phone" class="text-white">Phone</label>
                     </div>
 
-                    <div class="form-floating mb-3">
-                        <input
-                            v-model="form.year"
-                            type="text"
-                            id="year"
-                            class="form-control bg-dark bg-opacity-10 text-white border border-white rounded"
-                            placeholder="Academic Year"
-                            style="--bs-bg-opacity: 0.1"
-                        />
-                        <label for="year" class="text-white"
-                            >Academic Year</label
-                        >
-                    </div>
-
+                    <!-- Password Field -->
                     <div class="form-floating mb-3">
                         <input
                             v-model="form.password"
@@ -90,17 +118,18 @@
                         >
                     </div>
 
+                    <!-- Confirm Password Field -->
                     <div class="form-floating mb-3">
                         <input
-                            v-model="form.confirmPassword"
+                            v-model="form.password_confirmation"
                             type="password"
-                            id="confirmPassword"
+                            id="password_confirmation"
                             class="form-control bg-dark bg-opacity-10 text-white border border-white rounded"
                             placeholder="Confirm Password"
                             required
                             style="--bs-bg-opacity: 0.1"
                         />
-                        <label for="confirmPassword" class="text-white"
+                        <label for="password_confirmation" class="text-white"
                             >Confirm Password</label
                         >
                     </div>
@@ -162,54 +191,74 @@ export default {
     data() {
         return {
             form: {
-                name: "",
                 email: "",
-                phone: "",
-                year: "",
                 password: "",
-                confirmPassword: "",
             },
             loading: false,
             error: null,
             success: null,
+            validationErrors: {},
         };
     },
     methods: {
-        async register() {
+        async login() {
             this.loading = true;
             this.error = null;
             this.success = null;
-
-            if (this.form.password !== this.form.confirmPassword) {
-                this.error = "Passwords do not match.";
-                this.loading = false;
-                return;
-            }
+            this.validationErrors = {};
 
             try {
-                const response = await axios.post("/api/auth/register", {
-                    name: this.form.name,
-                    email: this.form.email,
-                    phone: this.form.phone,
-                    year: this.form.year,
-                    password: this.form.password,
-                });
-                this.success = "Registration successful!";
-                this.form = {
-                    name: "",
-                    email: "",
-                    phone: "",
-                    year: "",
-                    password: "",
-                    confirmPassword: "",
-                };
-            } catch (err) {
-                this.error =
-                    err.response?.data?.message || "Registration failed.";
+                const response = await this.$http.post(
+                    "/api/auth/login",
+                    this.form
+                );
+
+                // Handle successful login
+                this.handleSuccessfulLogin(response);
+            } catch (error) {
+                this.handleLoginError(error);
             } finally {
                 this.loading = false;
             }
         },
+
+        handleSuccessfulLogin(response) {
+            // Store token and set auth header
+            const token = response.data.data.access_token;
+            localStorage.setItem("auth_token", token);
+            this.$http.defaults.headers.common[
+                "Authorization"
+            ] = `Bearer ${token}`;
+
+            // Show success message
+            this.success = response.data.message || "Login successful!";
+
+            // Redirect after short delay
+            setTimeout(() => {
+                window.location.href = "/home"; // Or this.$router.push('/home')
+            }, 1500);
+        },
+
+        handleLoginError(error) {
+            if (error.response.status === 422) {
+                // Laravel validation errors
+                this.validationErrors = error.response.data.errors;
+                this.error = "Please fix the validation errors";
+            } else if (error.response.status === 401) {
+                this.error = "Invalid credentials. Please try again.";
+            } else {
+                this.error =
+                    error.response?.data?.message ||
+                    "Login failed. Please try again later.";
+            }
+        },
+    },
+    mounted() {
+        // Clear any existing auth data
+        if (localStorage.getItem("auth_token")) {
+            localStorage.removeItem("auth_token");
+            delete this.$http.defaults.headers.common["Authorization"];
+        }
     },
 };
 </script>
