@@ -3,33 +3,47 @@
         <navbar-component v-if="!$route.meta.hideNavbar" />
         <router-view />
     </div>
+
+    <div>
+        <footer-component v-if="!$route.meta.hideFooter" />
+    </div>
 </template>
 
 <script>
 export default {
     name: "App",
     created() {
-        // Set up axios headers when app initializes
         this.setupAxios();
     },
     methods: {
         setupAxios() {
             // Get CSRF token from meta tag
-            const token = document.head.querySelector(
-                'meta[name="csrf-token"]'
-            );
+            const csrfToken = document.querySelector('meta[name="csrf-token"]');
 
-            if (token) {
+            if (csrfToken) {
                 window.axios.defaults.headers.common["X-CSRF-TOKEN"] =
-                    token.content;
+                    csrfToken.content;
             }
 
-            // Always set this for API requests
-            window.axios.defaults.headers.common["X-Requested-With"] =
-                "XMLHttpRequest";
-
-            // Set base URL if needed
+            // Set base URL for API endpoints
             window.axios.defaults.baseURL = "/api";
+
+            // Handle token refresh (if using JWT)
+            this.setupAuthInterceptor();
+        },
+
+        setupAuthInterceptor() {
+            window.axios.interceptors.response.use(
+                (response) => response,
+                (error) => {
+                    if (error.response?.status === 401) {
+                        // Handle unauthorized errors
+                        localStorage.removeItem("auth_token");
+                        this.$router.push("/login");
+                    }
+                    return Promise.reject(error);
+                }
+            );
         },
     },
 };

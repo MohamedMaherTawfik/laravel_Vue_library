@@ -158,7 +158,7 @@
                                         {{ category.name }}
                                     </h5>
                                     <router-link
-                                        :to="`/category/${category.id}`"
+                                        :to="`/details/${category.id}`"
                                         class="btn btn-outline-primary mt-2"
                                     >
                                         Browse Collection
